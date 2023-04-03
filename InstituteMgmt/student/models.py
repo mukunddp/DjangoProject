@@ -1,4 +1,9 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class User(AbstractUser):
+    type_user = models.CharField(max_length=50)
 
 
 # Create your models here.
@@ -14,20 +19,16 @@ class StudentProfile(models.Model):
 
 
 class Assignment(models.Model):
-
     pass
 
 
 class StudyMaterial(models.Model):
-
     pass
 
 
 class Batches(models.Model):
-
     pass
 
 
 class Announcements(models.Model):
-
     pass

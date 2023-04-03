@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-<body>
-<h1>This is register page</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block pagetitle %} Add Details of Student {% endblock pagetitle %}
+{% block content %}
+
+   
+<div class="container p-4">
+    <h1>This is register page</h1>
+
+    <div class=" container border">
+        <form action="#" class="signin-form" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label class="label" for="name">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group mb-3">
+                <label class="label" for="password">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group mb-3">
+                <label class="label" for="password">Repeate Password</label>
+                {{ form.password2 }}
+            </div>
+            <div class="form-group mb-3">
+                <label class="label" for="password">Type of User</label>
+                {{ form.type_user }}
+            </div>
+            
+            <span class="text-error">{{ form.errors }}</span>
+
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+    {% endblock %}
