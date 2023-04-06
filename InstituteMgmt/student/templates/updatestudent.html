@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Add Details of Student {% endblock pagetitle %}
+{% block content %}
+
+{% include 'navbar.html' %}
+<div class="container mt-5">
+    <div class="border">
+        <h3 class="text-center mt-3">Update Student Details </h3>
+        <form class="row g-3 p-4" action="{% url 'update_student' student.id %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" value="{{student.name}}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="{{student.email}}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Mobile</label>
+                <input type="number" class="form-control" name="mobile" value="{{student.mobile}}">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Gender</label>
+                <input type="text" class="form-control" name="gender" value="{{student.gender}}">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" name="dob" value="{{student.dob}}">
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Name of College</label>
+                <input type="text" class="form-control" name="college" value="{{student.college}}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Branch</label>
+                <input type="text" class="form-control" name="branch" value="{{student.branch}}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Year of Graduation</label>
+                <select class="form-select" name="grad">
+                    <option value='{{ student.year_graduation }}' selected>{{ student.year_graduation }}</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

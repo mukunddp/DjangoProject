@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Add Details of Student {% endblock pagetitle %}
+{% block content %}
+
+{% include 'navbar.html' %}
+<div class="container mt-5 mb-5 p-3">
+
+    <div class="card mt-3">
+        <div class="card-header">
+
+
+            <h1 class="ms-3">{{student.name}}</h1>
+            <p class="ms-4">{{student.id}}</p>
+
+            <a href="{% url 'update_student_form' student.id %}" class="btn btn-primary float-end me-2">Update</a>
+            <a href="{% url 'delete_student' student.id %}" class="btn btn-danger float-end me-2">Delete</a>
+        </div>
+        <div class="card-body">
+            <div class='p-3'>
+
+                <h4 class="ms-3">Basic Details</h4>
+                <hr>
+                <div class="p-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Name</h5>
+                            <h5>{{ student.name }}</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5>Date of Birth</h5>
+                            <h5>{{ student.dob }}</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5>Gender</h5>
+                            <h5>{{ student.gender }}</h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Email</h5>
+                            <h5>{{ student.email }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>Mobile</h5>
+                            <h5>{{ student.mobile }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <br>
+                <h4 class="ms-3">Educational Details</h4>
+                <hr>
+                <div class="p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>College Name</h5>
+                            <h5>{{ student.college }}</h5>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5> Branch </h5>
+                            <h5>{{ student.branch }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>Year of Passout</h5>
+                            <h5>{{ student.year_graduation }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- <h5 class="card-title">{{student.name}}</h5>
+                <p class="card-text">{{student.college}} | {{student.year_graduation}}</p> -->
+            </div>
+        </div>
+
+
+
+    </div>
+    {% endblock %}

@@ -6,7 +6,7 @@ from .models import StudentProfile
 
 
 # Create your views here.
-
+# Login form
 def login_view(request):
     form = LoginForm(request.POST or None)
     msg = None
@@ -19,7 +19,7 @@ def login_view(request):
             if user is not None and user.type_user == "student":
                 login(request, user)
                 return redirect('index')
-            elif user is not None and user.type_user == "teacher":
+            elif user is not None and user.type_user == "trainer":
                 login(request, user)
                 return redirect('student_list')
             else:
@@ -29,6 +29,7 @@ def login_view(request):
     return render(request, 'login.html', {'form': form, 'msg': msg})
 
 
+# Register User
 def register(request):
     msg = None
     if request.method == 'POST':
@@ -53,6 +54,8 @@ def logout(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
 #
 #
 # def login(request):

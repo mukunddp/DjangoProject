@@ -4,8 +4,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login_view/', views.login_view, name='login_view'),
+
+    # Authentication
     path('register/', views.register, name='register'),
+    path('login_view/', views.login_view, name='login_view'),
+    path('logout/', views.logout, name='logout'),
 
     # For Creating Entry inside DB
     path('add_student_form/', views.add_student_form, name='add_student_form'),
