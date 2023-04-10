@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block pagetitle %} This is index Page {% endblock pagetitle %}
+{% block content %}
+{% include 'navbar.html'%}
+<div style="height: 76px;">
+
+</div>
+{% include 'sidebar.html' %}
+
+<div class="w3-main" style="margin-left:300px; margin-right: 100;">
+
+  <h1 class="text-center mb-5">Assignments</h1>
+  <div class="row row-cols-1 row-cols-md-1 g-4">
+    <div class="col">
+      <div class="card mt-3 ms-5 me-5 mb-2 p-3" style="width: 60rem;">
+        <div class="card-body ">
+          <h5 class="card-title">Assignment 1</h5>
+          <p class="card-text">Authentication - Screenshot of home page with loged in User and logout button with login
+            page and register page</p>
+          <a href="#" class="btn btn-primary">View details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-2 ms-5 me-5 mb-2 p-3" style="width: 60rem;">
+        <div class="card-body ">
+          <h5 class="card-title">Assignment 2</h5>
+          <p class="card-text">Create Tables classes inside models.py and do create and read operations</p>
+          <a href="#" class="btn btn-primary">View details</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mt-2 ms-5 me-5 mb-2 p-3" style="width: 60rem;">
+        <div class="card-body">
+          <h5 class="card-title">Assignment 3</h5>
+          <p class="card-text">Perform Create Operation into Database!</p>
+          <a href="#" class="btn btn-primary">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

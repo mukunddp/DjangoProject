@@ -3,20 +3,27 @@
 {% block content %}
 
 {% include 'navbar.html' %}
-<div class="container mt-5 mb-5">
-    {% for student in list_student %}
-    <div class="card mt-3">
-        <div class="card-header">
-            {{student.id}} | {{ student.mobile }} | {{ student.email }}
-            <a href="{% url 'student_details' student.id %}" class="btn btn-primary float-end">See More..</a>
+<div style="height: 76px;">
+
+</div>
+{% include 'sidebar.html' %}
+
+<div class="w3-main" style="margin-left:300px; margin-right: 100;">
+    <div class="container mt-5 mb-5">
+        {% for student in list_student %}
+        <div class="card mt-3">
+            <div class="card-header">
+                {{student.id}} | {{ student.mobile }} | {{ student.email }}
+                <a href="{% url 'student_details' student.id %}" class="btn btn-primary float-end">See More..</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{student.name}}</h5>
+                <p class="card-text">{{student.college}} | {{student.year_graduation}}</p>
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{student.name}}</h5>
-            <p class="card-text">{{student.college}} | {{student.year_graduation}}</p>
-        </div>
+
+        {% endfor %}
+
     </div>
-
-    {% endfor %}
-
 </div>
 {% endblock %}

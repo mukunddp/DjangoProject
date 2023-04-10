@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block pagetitle %} This is index Page {% endblock pagetitle %}
+{% block content %}
+{% include 'navbar.html' %}
+<div style="height: 76px;">
+
+</div>
+{% include 'sidebar.html' %}
+
+<div class="w3-main" style="margin-left:300px; margin-right: 100;">
+  <div class="w3-panel w3-light-info w3-padding-16 w3-card">
+    <h3 class="w3-center">Python Jan23</h3>
+    <div class="row p-3">
+      <div class="col-sm-6">
+        <h5 class="card-title">Batch Start Date</h5>
+        <p class="card-text">15 jan 23</p>
+      </div>
+      <div class="col-sm-6">
+        <h5 class="card-title">Batch Code</h5>
+        <p class="card-text">pjzlp7</p>
+      </div>
+    </div>
+    <br> </br>
+    <div class="row p-3">
+      <div class="col-sm-6">
+        <h5 class="card-title">Course</h5>
+        <p class="card-text">Languages</p>
+      </div>
+      <div class="col-sm-6">
+        <h5 class="card-title">Subject</h5>
+        <p class="card-text">Python</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

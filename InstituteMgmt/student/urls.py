@@ -25,4 +25,10 @@ urlpatterns = [
     # to delete entry from DB
     path('delete_student/<int:pk>', views.delete_student, name='delete_student'),
 
+    # Dashboard
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('assignments/', views.assignments, name='assignments'),
+    path('announcements/', views.announcements, name='announcements'),
+    path('overview/', views.overview, name='overview'),
+    path('batch/', views.overview, name='batch')
 ]

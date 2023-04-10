@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 
 from .forms import SignUpForm, LoginForm
-from .models import StudentProfile
+from .models import StudentProfile, User
 
 
 # Create your views here.
@@ -78,6 +78,9 @@ def add_student(request):
         s.email = request.POST.get('email')
         s.dob = request.POST.get('dob')
         s.year_graduation = request.POST.get('grad')
+        user = request.user.id
+        users = User.objects.get(id=user)
+        s.user_id = users
         s.save()
     return redirect('index')
 
@@ -94,8 +97,11 @@ def student_list(request):
 
 # Reading all entry into db
 def student_details(request, pk):
-    student = StudentProfile.objects.get(id=pk)
-    return render(request, 'studentdetails.html', {'student': student})
+    try:
+        student = StudentProfile.objects.get(user_id=pk)
+        return render(request, 'studentdetails.html', {'student': student})
+    except:
+        return redirect('add_student_form')
 
 
 # Update student page into DB
@@ -124,3 +130,22 @@ def delete_student(request, pk):
     student = StudentProfile.objects.get(id=pk)
     student.delete()
     return redirect('student_list')
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
+def overview(request):
+    return render(request, 'overview.html')
+
+
+def assignments(request):
+    return render(request, 'assignments.html')
+
+
+def announcements(request):
+    return render(request, 'announcements.html')
+
+# def dashboard(request):
+#     return render(request, 'dashboard.html')

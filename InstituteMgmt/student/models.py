@@ -17,19 +17,27 @@ class StudentProfile(models.Model):
     college = models.CharField(max_length=500)
     branch = models.CharField(max_length=200)
     year_graduation = models.CharField(max_length=4)
+    # batch = models.CharField(max_length=15)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Assignment(models.Model):
-    pass
+    title_assignment = models.CharField(max_length=500)
+    notes = models.TextField()
+    end_date = models.DateTimeField()
+    batch = models.ForeignKey('student.Batches', on_delete=models.CASCADE)
 
 
-class StudyMaterial(models.Model):
-    pass
+# class StudyMaterial(models.Model):
+#     pass
 
 
 class Batches(models.Model):
-    pass
+    batch_name = models.CharField(max_length=150)
+    course = models.CharField(max_length=150)
+    batch_code = models.CharField(max_length=15)
 
 
 class Announcements(models.Model):
-    pass
+    batch = models.ForeignKey('student.Batches', on_delete=models.CASCADE)
+    notes = models.TextField()

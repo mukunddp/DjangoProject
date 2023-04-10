@@ -1,39 +1,42 @@
 <!-- navbar  -->
-<nav class="navbar navbar-expand-lg navbar-light bg-info p-3">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-info p-3 fixed-top ">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <a href="{% url 'dashboard' %}">
+        <img class="navbar-brand " src="{% static 'img/TECH_AMPLIFIER.png' %}" width="180" alt="Logo">
+    </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link ms-3 me-3" href="{% url 'dashboard' %}"><span
+                        style="font-size: larger;">Dashboard</span> </a>
             </li>
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link me-3" href="{% url 'student_details' request.user.id %}"><span
+                        style="font-size: larger;">Profile</span></a>
             </li>
+
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link me-3" href="{% url 'login_view' %}"><span
+                        style="font-size: larger;">Profile</span></a>
+            </li>
+            {% endif %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+
+
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+
         </ul>
 
     </div>
 
-    <a href="" class="float-end me-2">{{request.user.username}} </a>
+    {% if request.user.is_authenticated %}
+    <a class="float-end ms-3 me-3" href=""> {{request.user.username}} </a>
     <a href="{% url 'logout' %}" class="btn btn-danger float-end">Logout</a>
-
+    {% else %}
+    <a href="{% url 'login_view' %}" class="btn btn-warning float-end">Login / Sign Up</a>
+    {% endif %}
 </nav>
