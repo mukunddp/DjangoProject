@@ -3,22 +3,24 @@
 {% block content %}
 
    
-<div class="container p-4">
-    <h1>This is register page</h1>
 
-    <div class=" container border">
+<div class="container p-4 bg-light mt-5">
+
+    <div class="container d-flex justify-content-center p-4 mt-4">
         <form action="#" class="signin-form" method="post">
+            <h2 class="text-center">Register Here!</h2>
+
             {% csrf_token %}
             <div class="form-group mb-3">
-                <label class="label" >Username</label>
+                <label class="label" >Username</label><br>
                 {{ form.username }}
             </div>
             <div class="form-group mb-3">
-                <label class="label">Password</label>
+                <label class="label">Password</label><br>
                 {{ form.password1 }}
             </div>
             <div class="form-group mb-3">
-                <label class="label">Repeate Password</label>
+                <label class="label">Repeate Password</label><br>
                 {{ form.password2 }}
             </div>
             <div class="form-group mb-3">

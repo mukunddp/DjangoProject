@@ -30,5 +30,15 @@ urlpatterns = [
     path('assignments/', views.assignments, name='assignments'),
     path('announcements/', views.announcements, name='announcements'),
     path('overview/', views.overview, name='overview'),
-    path('batch/', views.overview, name='batch')
+    path('batch/', views.overview, name='batch'),
+
+    # trainer
+    path('add_trainer_form/', views.add_trainer_form, name='add_trainer_form'),
+    path('add_trainer/', views.add_trainer, name='add_trainer'),
+    path('trainer_details/<int:pk>', views.trainer_details, name='trainer_details'),
+    path('delete_trainer/<int:pk>', views.delete_trainer, name='delete_trainer'),
+
+    path('add_batches/', views.add_batches, name='add_batches'),
+
+
 ]

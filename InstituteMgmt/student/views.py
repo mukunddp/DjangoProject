@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
 
 from .forms import SignUpForm, LoginForm
-from .models import StudentProfile, User
+from .models import StudentProfile, User, TrainerProfile, Batches
 
 
 # Create your views here.
@@ -82,7 +82,7 @@ def add_student(request):
         users = User.objects.get(id=user)
         s.user_id = users
         s.save()
-    return redirect('index')
+    return redirect('student_details', request.user.id)
 
 
 def add_student_form(request):
@@ -93,6 +93,41 @@ def add_student_form(request):
 def student_list(request):
     list_student = StudentProfile.objects.all()
     return render(request, 'studentlist.html', {'list_student': list_student})
+
+
+def add_trainer_form(request):
+    return render(request, 'add_trainer_form.html')
+
+
+def add_trainer(request):
+    if request.user.type_user == 'trainer':
+        if request.method == 'POST':
+            s = TrainerProfile()
+            s.name = request.POST.get('name')
+            s.gender = request.POST.get('gender')
+            s.mobile = request.POST.get('mobile')
+            s.email = request.POST.get('email')
+            s.dob = request.POST.get('dob')
+            user = request.user.id
+            users = User.objects.get(id=user)
+            s.user_id = users
+            s.save()
+    return redirect('trainer_details', request.user.id)
+
+
+def trainer_details(request, pk):
+    try:
+        trainer = TrainerProfile.objects.get(user_id=pk)
+        return render(request, 'trainer_details.html', {'trainer': trainer})
+    except:
+
+        return redirect('add_trainer_form')
+
+
+def delete_trainer(request, pk):
+    trainer = TrainerProfile.objects.get(id=pk)
+    trainer.delete()
+    return redirect('trainer_details', pk)
 
 
 # Reading all entry into db
@@ -133,7 +168,19 @@ def delete_student(request, pk):
 
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    batches = Batches.objects.all()
+    return render(request, 'dashboard.html', {'batches':batches})
+
+
+def add_batches(request):
+    if request.method == 'POST':
+        batch = Batches()
+        batch.batch_name = request.POST.get('batch_name')
+        batch.batch_code = request.POST.get('batch_code')
+        batch.course = request.POST.get('course')
+        batch.save()
+        return redirect('dashboard')
+    return render(request, 'add_batches.html')
 
 
 def overview(request):

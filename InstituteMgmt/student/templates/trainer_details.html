@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Add Details of Student {% endblock pagetitle %}
+{% block content %}
+
+{% include 'navbar.html' %}
+<div style="height: 76px;">
+
+</div>
+<div class="container mt-5 mb-5 p-3">
+
+    <div class="card mt-3">
+        <div class="card-header">
+
+
+            <h1 class="ms-3">{{student.name}}</h1>
+            <p class="ms-4">{{student.id}}</p>
+
+            <a href="{% url 'delete_trainer' trainer.id %}" class="btn btn-danger float-end me-2">Delete</a>
+        </div>
+        <div class="card-body">
+            <div class='p-3'>
+
+                <h4 class="ms-3">Basic Details</h4>
+                <hr>
+                <div class="p-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Name</h5>
+                            <h5>{{ trainer.name }}</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5>Date of Birth</h5>
+                            <h5>{{ trainer.dob }}</h5>
+                        </div>
+                        <div class="col-3">
+                            <h5>Gender</h5>
+                            <h5>{{ trainer.gender }}</h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Email</h5>
+                            <h5>{{ trainer.email }}</h5>
+                        </div>
+                        <div class="col-6">
+                            <h5>Mobile</h5>
+                            <h5>{{ trainer.mobile }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <br>
+               
+                <!-- <h5 class="card-title">{{student.name}}</h5>
+                <p class="card-text">{{student.college}} | {{student.year_graduation}}</p> -->
+            </div>
+        </div>
+
+
+
+    </div>
+    {% endblock %}

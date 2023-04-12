@@ -78,7 +78,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'institutemgmt',
+        'NAME': 'jan23_institute',
         'USER': 'postgres',
         'PASSWORD': 'mukund',
         'HOST': '127.0.0.1',

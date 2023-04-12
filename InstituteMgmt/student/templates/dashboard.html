@@ -10,19 +10,19 @@
 <h1 class="class= fw-normal text-center">All Batches</h1>
 <hr>
 <div class="row row-cols-1 row-cols-md-2 g-4 me-5 ms-5">
-
+    {% for batch in batches %}
     <div class="col-md-3">
         <a href="{% url 'batch' %}">
             <div class="card mt-5 ms-5 me-3 mb-5">
-                <div class="card-header bg-transparent border-success">Python Dec-22</div>
+                <div class="card-header bg-transparent border-success">{{batch.batch_name}}</div>
                 <div class="card-body ">
-                    <h5 class="card-title">Languages Python <br> </h5>
-                    <p class="card-text">Tech Amplifier <br> </p>
+                    <h5 class="card-title">{{batch.course}}<br> </h5>
+                    <p class="card-text">{{batch.batch_code}} <br> </p>
                 </div>
-            </div>
+            </div>̥
         </a>
     </div>
-
+    {% endfor %}
 </div>
 </a>
 

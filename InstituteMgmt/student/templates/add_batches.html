@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block pagetitle %} Add Details of Student {% endblock pagetitle %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+<div style="height: 76px;">
+
+</div>
+<div class="container mt-5">
+    <div class="border">
+        <h3 class="text-center mt-3">Add Student Details </h3>
+        <form class="row g-3 p-4" action="{% url 'add_batches' %}" method="post">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <label class="form-label">Batch Name</label>
+                <input type="text" class="form-control" name="batch_name">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Course</label>
+                <input type="text" class="form-control" name="course">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Batch Code</label>
+                <input type="text" class="form-control" name="batch_code">
+            </div>
+            <div class="col-12 text-center mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

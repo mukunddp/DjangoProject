@@ -13,10 +13,21 @@
                         style="font-size: larger;">Dashboard</span> </a>
             </li>
             {% if request.user.is_authenticated %}
+            {% if request.user.type_user == 'trainer' %}
+            <li class="nav-item">
+                <a class="nav-link me-3" href="{% url 'trainer_details' request.user.id  %}"><span
+                        style="font-size: larger;">Profile</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-3" href="{% url 'add_batches' %}"><span
+                        style="font-size: larger;">Add Batch</span></a>
+            </li>
+            {% else %}
             <li class="nav-item">
                 <a class="nav-link me-3" href="{% url 'student_details' request.user.id %}"><span
                         style="font-size: larger;">Profile</span></a>
             </li>
+            {% endif %}
 
             {% else %}
             <li class="nav-item">
