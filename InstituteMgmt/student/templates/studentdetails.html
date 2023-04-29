@@ -13,10 +13,33 @@
 
 
             <h1 class="ms-3">{{student.name}}</h1>
-            <p class="ms-4">{{student.id}}</p>
+            <p class="ms-4">{{student.id}} | <b>{{student.batch}}</b> </p>
+
+
 
             <a href="{% url 'update_student_form' student.id %}" class="btn btn-primary float-end me-2">Update</a>
             <a href="{% url 'delete_student' student.id %}" class="btn btn-danger float-end me-2">Delete</a>
+            <div class="float-end">
+                <form class="d-flex" action="{% url 'add_student_batch' student.id %}" method="post">
+                    {% csrf_token %}
+                    <select class="form-control float-end" name="batch">
+                        {% if student.batch != 'null' %}
+                        <option value="{{student.batch}}">{{student.batch}}</option>
+                        {% else %}
+                        <option value="null">Select Batch</option>
+                        {% endif %}
+
+                        {% for batch in batches %}
+                        <option value="{{batch.batch_name}}">{{batch.batch_name}}</option>
+                        {% endfor %}
+
+                    </select>
+                    <button class="btn btn-primary float-end me-2"
+                        type="submit">Add_Batch</button>
+
+                </form>
+
+            </div>
         </div>
         <div class="card-body">
             <div class='p-3'>

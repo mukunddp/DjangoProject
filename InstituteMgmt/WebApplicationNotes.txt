@@ -1,0 +1,262 @@
+
+#### Web Application Overview : JAN 23 ##### 
+
+ - Web Application and Web Site Difference
+ - HTTP Request and Responce cycle 
+ - Client and Server difference 
+ 
+ - Client Side : 
+		HTML, CSS, JavaScript, BootStrap, 
+		
+		
+ - Server Side : / Backend 
+		Python and Django 
+
+ - DataBase : 
+		Postgres 
+		
+		
+
+
+							# # # # # Django Backend # # # # 
+
+
+
+# # # # # # # Problem Statement # # # # # # # #
+
+Institute Management System  : 
+
+We are going create a application to manage students in batches with there assignments , study materials, announcements 
+Two types of Users :
+* Students
+* Trainer  
+
+- Login Page 
+- Register Page
+
+- Dashboard : 
+		Trainer	: 
+			Multiple Batches where I am teaching 
+		Students : 
+			Multiple Batches where they are learning 
+
+
+- Inside Batches : 
+		Overview : Overview of that perticular batch 
+		Students : List of Students inside that batch 
+		Assignments : assign assignments to students
+		Study Materials : Add Study Materials 
+		Announcements : Make Announcements to batch
+		
+- Profile : each User Profile 
+
+
+
+1) 	Create a Project inside Pycharm with Virtual Environment 
+
+2)	We have Installed Django framework :
+		- pip install django 
+			
+3)  We have created a Django Project : 
+		- django-admin startproject <Project_Name>
+			(we have created a project name as firstproject) 
+			
+			the file structure created as below :
+			
+			- firstproject
+				- firstproject
+				- manage.py 
+				
+				
+*)	We need to go inside project so : (change directory)
+		- cd <Project_Name>
+	
+	
+4) 	Now to start development server we are going get help from manage.py 
+		- python manage.py runserver 
+		
+		(started development server : http://127.0.0.1:8000)
+
+
+
+5)	we have created a APP based on our need (we are going to manage students so, App name is Student)
+		to create a APP use below command, 
+		
+			- python manage.py startapp <APP_NAME> 
+				eg. python manage.py startapp student
+				
+	- As soon as we have created app need to add the name (student) of APP inside INSTALLED_APPS in settings.py 
+				
+				
+6)	We have to connect database to application
+	- Need to perform migrations 
+		- python manage.py makemigrations
+		
+	- to make changes or add the fields inside database 
+		- python manage.py migrate 
+		
+		
+7)	To see admin Interface we have to create a superuser 
+		- to create SuperUser 
+			- python manage.py createsuperuser 
+
+
+		Putting required things like username and password 
+			and We can login in inside admin interface 
+			( http://127.0.0.1:8000/admin/ )
+			
+	
+8)	MVT : 
+		- Create templates
+		- views 
+		- render function 
+		- urls 	
+
+10)	Connect DataBase:
+		- connections of DB into settings.py 
+			  'default': {
+					'ENGINE': 'django.db.backends.postgresql',
+					'NAME': 'institute',
+					'USER': 'postgres',
+					'PASSWORD': 'mukund',
+					'HOST': '127.0.0.1',
+					'PORT': '5432',
+				}
+		
+		- Need a module to understand postgres - psycopg2
+			pip install psycopg2
+
+*) Applied Migrations - makemigrations and migrate 
+	- created tables inside new database
+	
+11) Create a Student Profile :
+		we have created a class inside models.py, and inherited Model class from models (models.Model) inside newly created table/class
+			 EG: 
+				class Student(models.Model):
+					name = models.CharField(max_length=200)
+					mobile = models.BigIntegerField()
+					email = models.CharField(max_length=200)
+					dob = models.CharField(max_length=200)
+					gender = models.CharField(max_length=200)
+					college = models.CharField(max_length=500)
+					branch = models.CharField(max_length=200)
+				
+*) Applied Migrations - makemigrations and migrate 
+	- created tables inside new database
+	
+11)	CRUD : 
+
+# CRUD
+# Create a Entry in DB
+# Read the Entries from DB
+# Update the Entries from DB
+# Delete the Entries from DB
+
+
+
+# Create a Entry in DB:
+		*- create a HTML Page and write a form into it with mentioned database fields 
+		*- write a function for opening that html page 
+		*- add path for above function into urls.py 
+		*- write a function for getting data from front end and storing into database 
+		*- add path for above function into urls.py 
+		
+	while creating Form -
+			- write a url of the function which stored the data in database inside action as below-  
+			- add method = post inside form tag 
+			- after form tag add a csrf_token as below 
+			- all input tags should have name attribute and that should be unique and we need to match it with backend.
+			- a submit button containing type='submit'
+			
+				<form action="{% url 'store_student' %}" method="post">
+					{% csrf_token %}
+					
+					<-- Write all input tags and labels here -->
+					
+					<button type='submit'> Submit <button/>
+
+	Now storing data - 
+		- need to create a object for class of database table which is inside models and before that we need import it in views.py 
+		- by using that object need to assign values which are coming from front end to the attributes inside that class 
+		- so to get data from front end we use the following format, 
+				BUT inside get function we write the similar unique name which is assigned to input fields 
+				- request.POST.get('name')
+		- after assigning data from frontend to attributes of class now we need to store that into it 
+				we use save() method to store {s.save()}
+				
+		- we are going to redirect after storing data.... 
+
+		for reference:- 
+			def add_student(request):
+				s = StudentProfile()
+				s.name = request.POST.get('name')
+				s.gender = request.POST.get('gender')
+				s.mobile = request.POST.get('mobile')
+				s.branch = request.POST.get('branch')
+				s.college = request.POST.get('college')
+				s.email = request.POST.get('email')
+				s.dob = request.POST.get('dob')
+				s.year_graduation = request.POST.get('grad')
+				s.save()
+				return redirect('index')
+			
+			
+
+# Read the Entries from DB
+		
+		*- create a HTML Page for showing the data 
+		*- write a function for opening that html page 
+		*- add path for above function into urls.py 
+		*- to get all the data from DB will write a varible and in that call the data from class of models.py
+			
+			synatax:
+				variable = NAME_CLASS_MODELS.objects.all() 	# this will get all the data from perticular class 
+															name and store into variable
+			ex: 												
+				show = Student.objects.all()					
+															
+															
+		*- now to send the data to html we need to use render function where will pass the 3rd parameter as context ( context should be in the form of dictionary )
+			return render(request, 'student_details.html', {'show': show})
+			
+		*- By using Jinja Templating we can access the varible which we are passing as third parameter
+
+# Update the Entries from DB
+
+
+
+
+# Authentication :
+
+
+
+
+
+# Project : 
+
+
+
+# Clinic Management
+Two types of Users :
+* Patient login
+* Doctor login
+
+- Login Page 
+- Register Page
+
+- Dashboard Doctor : 
+		Doctor Profile	: 
+		Patient List:
+			- Patient Profile 
+			- Appointmets / Visit
+				// CRUD (prescription, details(blood group, last, ))
+				// Payments - paid amount number should added into doctor income 
+			- Transaction- (History of transction ) : from paiten, amount, date 
+			
+- Dashboard Patient : 
+		Patient Profile	: 
+		Patient Appointmets: 
+				// R (prescription, details(blood group, last, ))
+			
+		
+- Profile : each User Profile 

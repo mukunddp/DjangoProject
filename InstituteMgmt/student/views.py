@@ -135,7 +135,8 @@ def student_details(request, pk):
     try:
         student = StudentProfile.objects.get(user_id=pk)
         return render(request, 'studentdetails.html', {'student': student})
-    except:
+    except Exception as e:
+        print(e)
         return redirect('add_student_form')
 
 
@@ -169,7 +170,15 @@ def delete_student(request, pk):
 
 def dashboard(request):
     batches = Batches.objects.all()
-    return render(request, 'dashboard.html', {'batches':batches})
+    try:
+        student = StudentProfile.objects.get(user_id=request.user.id)
+        for batch in batches:
+            if student.batch == batch.batch_name:
+                print(batch.batch_name)
+                return render(request, 'dashboard.html', {'batch': batch})
+    except:
+        return render(request, 'dashboard.html', {'message': 'Ask admin to add into Batch'})
+    return render(request, 'dashboard.html', {'batches': batches})
 
 
 def add_batches(request):
@@ -183,8 +192,42 @@ def add_batches(request):
     return render(request, 'add_batches.html')
 
 
+def registered_list(request):
+    list_student = StudentProfile.objects.all()
+    return render(request, 'registered_list.html', {'list_student': list_student})
+
+
+def view_student_details(request, pk):
+    student = StudentProfile.objects.get(id=pk)
+    batches = Batches.objects.all()
+    return render(request, 'studentdetails.html', {'student': student, 'batches': batches})
+
+
+def add_student_batch(request, pk):
+    if request.method == 'POST':
+        student = StudentProfile.objects.get(id=pk)
+        student.batch = request.POST.get('batch')
+        student.save()
+        return redirect('registered_list')
+
+
 def overview(request):
+    student = StudentProfile.objects.get(user_id=request.user.id)
+    batches = Batches.objects.all()
+    for batch in batches:
+        if student.batch == batch.batch_name:
+            print(batch.batch_name)
+            return render(request, 'overview.html', {'batch': batch})
     return render(request, 'overview.html')
+
+
+def student_list_batch(request):
+    student = StudentProfile.objects.get(user_id=request.user.id)
+    batches = Batches.objects.all()
+    for batch in batches:
+        if student.batch == batch.batch_name:
+            list_student = StudentProfile.objects.filter(batch=batch.batch_name)
+            return render(request, 'studentlist.html', {'list_student': list_student})
 
 
 def assignments(request):

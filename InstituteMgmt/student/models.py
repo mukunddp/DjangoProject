@@ -17,7 +17,7 @@ class StudentProfile(models.Model):
     college = models.CharField(max_length=500)
     branch = models.CharField(max_length=200)
     year_graduation = models.CharField(max_length=4)
-    batch = models.CharField(max_length=250, null=True)
+    batch = models.CharField(max_length=250, null=True)     # JAN
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

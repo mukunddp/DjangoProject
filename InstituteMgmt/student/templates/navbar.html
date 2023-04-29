@@ -2,7 +2,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg navbar-light bg-info p-3 fixed-top ">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-    <a href="{% url 'dashboard' %}">
+    <a href="{% url 'index' %}">
         <img class="navbar-brand " src="{% static 'img/TECH_AMPLIFIER.png' %}" width="180" alt="Logo">
     </a>
 
@@ -21,6 +21,10 @@
             <li class="nav-item">
                 <a class="nav-link me-3" href="{% url 'add_batches' %}"><span
                         style="font-size: larger;">Add Batch</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-3" href="{% url 'registered_list' %}"><span
+                        style="font-size: larger;">Registered Students</span></a>
             </li>
             {% else %}
             <li class="nav-item">

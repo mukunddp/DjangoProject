@@ -9,12 +9,29 @@
 
 <h1 class="class= fw-normal text-center">All Batches</h1>
 <hr>
+<h3 class="text-center p-3 ms-5 me-5 rounded" style="background-color: coral;" >{{message}}</h3>
 <div class="row row-cols-1 row-cols-md-2 g-4 me-5 ms-5">
+
+    {% if request.user.type_user == 'student'%}
+    <div class="col-md-3">
+        <a href="{% url 'batch' %}" style="text-decoration: none;">
+            <div class="card text-center mt-5 ms-5 me-3 mb-5">
+                <div class="card-header  bg-transparent border-success">{{batch.batch_name}}</div>
+                <div class="card-body ">
+                    <h5 class="card-title">{{batch.course}}<br> </h5>
+                    <p class="card-text">{{batch.batch_code}} <br> </p>
+                </div>
+            </div>̥
+        </a>
+    </div>
+
+    {% else %}
+    
     {% for batch in batches %}
     <div class="col-md-3">
-        <a href="{% url 'batch' %}">
-            <div class="card mt-5 ms-5 me-3 mb-5">
-                <div class="card-header bg-transparent border-success">{{batch.batch_name}}</div>
+        <a href="{% url 'batch' %}" style="text-decoration: none;">
+            <div class="card text-center mt-5 ms-5 me-3 mb-5">
+                <div class="card-header  bg-transparent border-success">{{batch.batch_name}}</div>
                 <div class="card-body ">
                     <h5 class="card-title">{{batch.course}}<br> </h5>
                     <p class="card-text">{{batch.batch_code}} <br> </p>
@@ -23,6 +40,7 @@
         </a>
     </div>
     {% endfor %}
+    {% endif %}
 </div>
 </a>
 

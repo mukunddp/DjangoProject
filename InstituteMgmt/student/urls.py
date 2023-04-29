@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Home Page
     path('', views.index, name='index'),
 
     # Authentication
@@ -39,6 +40,10 @@ urlpatterns = [
     path('delete_trainer/<int:pk>', views.delete_trainer, name='delete_trainer'),
 
     path('add_batches/', views.add_batches, name='add_batches'),
+    path('registered_list/', views.registered_list, name='registered_list'),
+    path('view_student_details/<int:pk>', views.view_student_details, name='view_student_details'),
+    path('add_student_batch/<int:pk>', views.add_student_batch, name='add_student_batch'),
+    path('student_list_batch/', views.student_list_batch, name='student_list_batch'),
 
 
 ]

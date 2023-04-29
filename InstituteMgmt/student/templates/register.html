@@ -2,7 +2,7 @@
 {% block pagetitle %} Add Details of Student {% endblock pagetitle %}
 {% block content %}
 
-   
+
 
 <div class="container p-4 bg-light mt-5">
 
@@ -12,7 +12,7 @@
 
             {% csrf_token %}
             <div class="form-group mb-3">
-                <label class="label" >Username</label><br>
+                <label class="label">Username</label><br>
                 {{ form.username }}
             </div>
             <div class="form-group mb-3">
@@ -27,15 +27,20 @@
                 <label class="label">Type of User</label>
                 {{ form.type_user }}
             </div>
-            
+
             <span class="text-error " style="color:red">{{ form.errors }}</span>
 
             <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up
                 </button>
             </div>
-
+            <hr>
+            <div class="text-center">
+                Already Registered then Login Here!
+                <br>
+                <a href="{% url 'login_view' %}" class="">login here</a>
+            </div>
         </form>
     </div>
 </div>
-    {% endblock %}
+{% endblock %}
